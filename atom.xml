@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-02-10T10:01:46.667Z</updated>
+  <updated>2022-02-10T10:06:37.196Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/2022/02/10/Hexo%E7%9A%84Buteerfly%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90Valine%E8%AF%84%E8%AE%BA/"/>
     <id>http://example.com/2022/02/10/Hexo%E7%9A%84Buteerfly%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90Valine%E8%AF%84%E8%AE%BA/</id>
     <published>2022-02-10T09:26:37.000Z</published>
-    <updated>2022-02-10T10:01:46.667Z</updated>
+    <updated>2022-02-10T10:06:37.196Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Hexo的Buteerfly主题集成Valine评论"><a href="#Hexo的Buteerfly主题集成Valine评论" class="headerlink" title="Hexo的Buteerfly主题集成Valine评论"></a>Hexo的Buteerfly主题集成Valine评论</h1><p>​    这次主要是为我的博客集成评论系统，方便技术交流，但是hexo博客未自带评论系统，有些主题自带了评论系统，但是Butterfly主题并没有，需要自己配置，用这篇博文记录一下。</p><p>​    <a href="https://valine.js.org/">Valine</a>官网有一些关于配置的介绍也可以去看看</p><p>​    <a href="https://butterfly.js.org/posts/ceeb73f/">Butterfly配置文档</a>中也有关于评论系统的一些配置和配置文件中各个参数的介绍</p><p>在所有的评论系统中，Valine是唯一一个无后端的评论系统，方便易用，但是是基于leancloud的，所以我们需要去注册一个LeanCloud的账号</p><p><a href="https://console.leancloud.cn/register">LeanCloud 注册点这里</a></p><ul><li>Github大礼包：<a href="https://github.com/iissnan/hexo-theme-next/issues/1604">gitment</a>， <a href="https://github.com/iissnan/hexo-theme-next/pull/2037">gitalk</a><strong>（推荐），</strong><a href="https://www.vincentqin.tech/2016/08/09/build-a-website-using-hexo/#%E5%A2%9E%E5%8A%A0Gitter">gitter</a><strong>（推荐）;</strong> 三个都支持<strong>Markdown；</strong></li><li>基于leancloud的无后端评论系统：<a href="https://valine.js.org/#/">Valine</a><strong>（推荐，</strong>支持<strong>Markdown）；</strong></li><li>国外的有几个：<a href="http://www.disqus.com/">disqus</a>(漂亮，但需翻墙)，<a href="https://www.hypercomments.com/">hypercomments</a><strong>（推荐，</strong>不支持<strong>Markdown）.</strong></li></ul><ol><li><p>注册完了之后，我们还需要创建一个应用，应用名称随意。<img src="/2022/02/10/Hexo%E7%9A%84Buteerfly%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90Valine%E8%AF%84%E8%AE%BA/image-20220210174752744.png" alt="image-20220210174752744"></p></li><li><p>然后点进去应用找到结构化数据，创建一个新的Class，名为Comment，之后的评论数据会保存在这里面。<img src="/2022/02/10/Hexo%E7%9A%84Buteerfly%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90Valine%E8%AF%84%E8%AE%BA/image-20220210175132766.png" alt="image-20220210175132766"></p></li><li><p>然后在设置中找到安全中心，设置服务开关为数据存储（防止恶意攻击），再将自己的域名保存到Web安全域名中<img src="/2022/02/10/Hexo%E7%9A%84Buteerfly%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90Valine%E8%AF%84%E8%AE%BA/image-20220210175418269.png" alt="image-20220210175418269"></p></li><li><p>再在设置中找到应用凭证，将其中的AppID和AppKey保存到主题目录下的_config.yml<img src="/2022/02/10/Hexo%E7%9A%84Buteerfly%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90Valine%E8%AF%84%E8%AE%BA/image-20220210175805940.png" alt="image-20220210175805940"></p></li><li><p>继续在主题目录下的_config.yml中设置Comments参数<img src="/2022/02/10/Hexo%E7%9A%84Buteerfly%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90Valine%E8%AF%84%E8%AE%BA/image-20220210175954025.png" alt="image-20220210175954025"></p></li><li><p>再将hexo c 和 hexo s一下就行了，测试效果如下：<img src="/2022/02/10/Hexo%E7%9A%84Buteerfly%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90Valine%E8%AF%84%E8%AE%BA/image-20220210180113957.png" alt="image-20220210180113957"></p></li></ol>]]></content>
     
