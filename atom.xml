@@ -44,6 +44,30 @@
   </entry>
   
   <entry>
+    <title>搭建阿里云ECS服务器</title>
+    <link href="http://example.com/2022/02/10/%E6%90%AD%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://example.com/2022/02/10/%E6%90%AD%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</id>
+    <published>2022-02-10T02:17:19.000Z</published>
+    <updated>2022-02-10T07:16:11.908Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="搭建阿里云ECS服务器"><a href="#搭建阿里云ECS服务器" class="headerlink" title="搭建阿里云ECS服务器"></a>搭建阿里云ECS服务器</h1><p>​    这次搭建阿里云服务器的主要原因是想在完成论文的项目时候，将自己的项目发布到服务器上，通过自己搭建服务器也可以更加深刻的理解计算机网络。</p><p>​    好了，现在就让我们一起搭建ECS服务器吧！</p><h2 id="第一步：购买服务器"><a href="#第一步：购买服务器" class="headerlink" title="第一步：购买服务器"></a>第一步：购买服务器</h2><p>​    在每年的春节中，阿里云服务器都有很大力度的折扣，新用户也都可以免费使用一个月的服务器，还是很划算的，根据自己的需要选购服务器就好了，我这边选择的是38元/年的ECS共享型 n4。</p><p><img src="/2022/02/10/%E6%90%AD%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20220210103140758.png" alt="image-20220210103140758"></p><p>​    点击立即购买就可以在配置页面简单配置自己的服务器参数</p><p><img src="/2022/02/10/%E6%90%AD%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20220210103805546.png" alt="image-20220210103805546"></p><p>操作系统我这边选择的是CentOS 7.9，系统盘在优惠的活动中最多选择到42GB</p><h2 id="第二步：配置服务器"><a href="#第二步：配置服务器" class="headerlink" title="第二步：配置服务器"></a>第二步：配置服务器</h2><p>​    购买完服务器后就可以在控制台看到自己的服务器实例</p><p><img src="/2022/02/10/%E6%90%AD%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20220210104516594.png" alt="image-20220210104516594"></p><ol><li><p>点击实例的名称就可以查看服务器实例的详情<img src="/2022/02/10/%E6%90%AD%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20220210104831734.png" alt="image-20220210104831734"></p></li><li><p>先重置一下我们的实例密码，方便我们后续登录<img src="/2022/02/10/%E6%90%AD%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20220210104936867.png" alt="image-20220210104936867"></p></li><li><p>重置密码时，需要验证我们的手机号，重制完了之后重启一下服务器就重置成功了，然后再点击选择我们需要的安全组，不然服务器的未允许的端口无法访问<img src="/2022/02/10/%E6%90%AD%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20220210105251151.png" alt="image-20220210105251151"></p></li><li><p>根据自己的需要，选择安全组的端口范围，手动添加和快速添加都可以<img src="/2022/02/10/%E6%90%AD%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20220210105429728.png" alt="image-20220210105429728"></p></li><li><p>配置完这些之后就可以启动并远程链接服务器了<img src="/2022/02/10/%E6%90%AD%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20220210110009551.png" alt="image-20220210110009551"><img src="/2022/02/10/%E6%90%AD%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20220210110037718.png" alt="image-20220210110037718"></p></li><li><p>点击立即登录后就是之前我们设置的管理员密码<img src="/2022/02/10/%E6%90%AD%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20220210110218017.png" alt="image-20220210110218017"></p></li><li><p>到这样的页面就说明远程连接成功<img src="/2022/02/10/%E6%90%AD%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20220210110610914.png" alt="image-20220210110610914"></p></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;搭建阿里云ECS服务器&quot;&gt;&lt;a href=&quot;#搭建阿里云ECS服务器&quot; class=&quot;headerlink&quot; title=&quot;搭建阿里云ECS服务器&quot;&gt;&lt;/a&gt;搭建阿里云ECS服务器&lt;/h1&gt;&lt;p&gt;​    这次搭建阿里云服务器的主要原因是想在完成论文的项目时候，将</summary>
+      
+    
+    
+    
+    <category term="服务器" scheme="http://example.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+    <category term="服务器" scheme="http://example.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>深入理解JVM笔记</title>
     <link href="http://example.com/2022/01/27/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E7%AC%94%E8%AE%B0/"/>
     <id>http://example.com/2022/01/27/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E7%AC%94%E8%AE%B0/</id>
