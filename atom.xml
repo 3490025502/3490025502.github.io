@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-04-05T12:49:55.787Z</updated>
+  <updated>2022-04-08T06:56:50.728Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>发送GET和POST请求调用远程接口</title>
+    <link href="http://example.com/2022/04/08/%E5%8F%91%E9%80%81GET%E5%92%8CPOST%E8%AF%B7%E6%B1%82%E8%B0%83%E7%94%A8%E8%BF%9C%E7%A8%8B%E6%8E%A5%E5%8F%A3/"/>
+    <id>http://example.com/2022/04/08/%E5%8F%91%E9%80%81GET%E5%92%8CPOST%E8%AF%B7%E6%B1%82%E8%B0%83%E7%94%A8%E8%BF%9C%E7%A8%8B%E6%8E%A5%E5%8F%A3/</id>
+    <published>2022-04-08T06:09:39.000Z</published>
+    <updated>2022-04-08T06:56:50.728Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h1><p>通过调用远程登录接口获取cookie或者token；</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * - 调用登录接口</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 返回Cookie</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Login</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String Cookie = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        CloseableHttpClient httpClient = HttpClients.createDefault();</span><br><span class="line">        HttpClientContext context = HttpClientContext.create();</span><br><span class="line">        HttpPost httpPost = <span class="keyword">new</span> HttpPost(URL+<span class="string">&quot;/auth/login.do&quot;</span>);</span><br><span class="line">    </span><br><span class="line">        List&lt;BasicNameValuePair&gt; list = <span class="keyword">new</span> ArrayList&lt;BasicNameValuePair&gt;();</span><br><span class="line">        list.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">&quot;deleteflag&quot;</span>, <span class="string">&quot;0&quot;</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">&quot;alwaysLogin&quot;</span>, <span class="string">&quot;true&quot;</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">&quot;username&quot;</span>, USERNAME));</span><br><span class="line">        list.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">&quot;password&quot;</span>, PASSWORD));</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">            httpPost.setEntity(<span class="keyword">new</span> UrlEncodedFormEntity(list, HTTP.UTF_8));</span><br><span class="line">            CloseableHttpResponse httpResponse = httpClient.execute(httpPost, context);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">null</span> != httpResponse) &#123;</span><br><span class="line">                HttpEntity httpEntity = httpResponse.getEntity();</span><br><span class="line">                JSONObject returnData = JSON.parseObject(EntityUtils.toString(httpEntity));</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">null</span> != returnData) &#123;</span><br><span class="line">                    Cookie = returnData.getJSONObject(<span class="string">&quot;data&quot;</span>).getString(<span class="string">&quot;cloudToken&quot;</span>);</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">&quot;JSESSIONID=&quot;</span>+Cookie;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            logger.error(e.getMessage(), e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;登录失败&quot;</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h1 id="调用post远程接口"><a href="#调用post远程接口" class="headerlink" title="调用post远程接口"></a>调用post远程接口</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调用POST方法传Json格式</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> url 接口地址</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> JSONObject&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> JSONObject <span class="title">doPostAll</span><span class="params">(String url, String projectId)</span> </span>&#123;</span><br><span class="line">        String Cookie = hoLogin();</span><br><span class="line">        JSONObject result = <span class="keyword">new</span> JSONObject();</span><br><span class="line">        </span><br><span class="line">        JSONObject params = <span class="keyword">new</span> JSONObject();</span><br><span class="line">        params.put(<span class="string">&quot;isCount&quot;</span>, <span class="keyword">false</span>);</span><br><span class="line">        params.put(<span class="string">&quot;projectId&quot;</span>, projectId);</span><br><span class="line">        HttpPost post = <span class="keyword">new</span> HttpPost(url);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            StringEntity string = <span class="keyword">new</span> StringEntity(params.toString(), <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">            string.setContentEncoding(<span class="keyword">new</span> BasicHeader(HTTP.CONTENT_TYPE, <span class="string">&quot;application/json&quot;</span>));</span><br><span class="line">            post.setEntity(string);</span><br><span class="line">            post.setHeader(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line">            post.setHeader(<span class="string">&quot;User-Agent&quot;</span>, <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)&quot;</span>);</span><br><span class="line">            post.addHeader(<span class="string">&quot;Cookie&quot;</span>,Cookie);</span><br><span class="line">            HttpResponse httpResponse = HttpClientUtil.getHttpClient().execute(post);</span><br><span class="line">            HttpEntity entity = httpResponse.getEntity();</span><br><span class="line">            result = JSONObject.parseObject(EntityUtils.toString(entity, <span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h1 id="调用Get远程接口"><a href="#调用Get远程接口" class="headerlink" title="调用Get远程接口"></a>调用Get远程接口</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调用Get远程接口</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> Id ID</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> JSONObject&#125;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException ioexception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> JSONObject <span class="title">doGetTree</span><span class="params">(String Id)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        String Cookie = Login();</span><br><span class="line">        CloseableHttpClient httpClient = HttpClients.createDefault();</span><br><span class="line">        HttpGet httpGet = <span class="keyword">new</span> HttpGet(URL+<span class="string">&quot;/query&quot;</span>);</span><br><span class="line">        httpGet.addHeader(<span class="string">&quot;Cookie&quot;</span>,Cookie);</span><br><span class="line">        CloseableHttpResponse httpResponse = httpClient.execute(httpGet);</span><br><span class="line">        HttpEntity entity = httpResponse.getEntity();</span><br><span class="line">        JSONObject result = JSONObject.parseObject(EntityUtils.toString(entity, <span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;登录&quot;&gt;&lt;a href=&quot;#登录&quot; class=&quot;headerlink&quot; title=&quot;登录&quot;&gt;&lt;/a&gt;登录&lt;/h1&gt;&lt;p&gt;通过调用远程登录接口获取cookie或者token；&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="代码清单" scheme="http://example.com/categories/%E4%BB%A3%E7%A0%81%E6%B8%85%E5%8D%95/"/>
+    
+    
+    <category term="Java" scheme="http://example.com/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>亲密关系</title>
@@ -485,29 +510,6 @@
     
     
     <category term="Git" scheme="http://example.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第一天来到Hexo</title>
-    <link href="http://example.com/2021/11/21/%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%9D%A5%E8%80%8DHexo/"/>
-    <id>http://example.com/2021/11/21/%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%9D%A5%E8%80%8DHexo/</id>
-    <published>2021-11-21T14:00:00.000Z</published>
-    <updated>2021-11-25T11:23:53.916Z</updated>
-    
-    <content type="html"><![CDATA[<p>来到hexo的第一天</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;来到hexo的第一天&lt;/p&gt;
-</summary>
-      
-    
-    
-    
-    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
-    
     
   </entry>
   
